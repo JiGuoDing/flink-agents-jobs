@@ -1,0 +1,34 @@
+# OpenAI-compatible Chat Completions endpoint.
+# The current demo deployment uses a local vLLM server.
+llm.base-url=http://114.212.135.74:18080/v1
+llm.api-key=
+llm.model=qwen3-0.6b
+# Optional extra Chat Completions request-body fields as JSON.
+# Qwen3 on vLLM: disable thinking so the Agent receives only the answer/tool call.
+llm.additional-kwargs={"chat_template_kwargs":{"enable_thinking":false}}
+llm.temperature=0.2
+llm.max-tokens=800
+llm.timeout-seconds=120
+llm.max-retries=2
+
+# Flink Agents runtime
+agent.async-threads=2
+agent.max-in-flight-records=1
+agent.memory-ttl-seconds=86400
+
+# Exact-match cache (used by CustomerSupportAgentJob only)
+cache.ttl-seconds=600
+
+# Plan-Act demo
+planact.max-steps=8
+
+# Flink job and checkpointing
+job.parallelism=1
+job.checkpoint.interval-ms=10000
+job.checkpoint.min-pause-ms=5000
+job.checkpoint.timeout-ms=60000
+# Leave blank to use Flink's default checkpoint storage. Set HDFS/S3 for production.
+job.checkpoint.dir=
+
+# Local bounded demo source
+demo.records-per-second=1.0
